@@ -1,6 +1,6 @@
 #include "sort.h"
 /**
- * shell_sort - sorts an array using the Shell sort algorithm w/ Knuth sequence
+ * shell_sort - sorts an array using the shell sort algorithm w/ Knuth sequence
  * @array: array to be sorted
  * @size: size of the array
  */
