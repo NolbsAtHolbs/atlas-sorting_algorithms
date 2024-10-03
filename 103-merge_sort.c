@@ -45,9 +45,17 @@ static void merge(int *array, size_t start, size_t middle, size_t end)
 {
 	size_t left_size = middle - start + 1;
 	size_t right_size = end - middle;
-	int left_array[4096], right_array[4096];
+	int *left_array, *right_array;
 	size_t i = 0, j = 0, k = start;
 
+	left_array = malloc(sizeof(int) * left_size);
+	right_array = malloc(sizeof(int) * right_size);
+	if (!left_array || !right_array)
+	{
+		free(left_array);
+		free(right_array);
+		return;
+	}
 	printf("Merging...\n");
 	/* copy data to temporary arrays */
 	for (i = 0; i < left_size; i++)
@@ -60,6 +68,7 @@ static void merge(int *array, size_t start, size_t middle, size_t end)
 	print_array(right_array, right_size);
 	/* merge the temporary arrays back into the original array */
 	i = 0;
+	j = 0;
 	while (k <= end)
 	{
 		if (i < left_size && (j >= right_size || left_array[i] <= right_array[j]))
@@ -69,4 +78,7 @@ static void merge(int *array, size_t start, size_t middle, size_t end)
 	}
 	printf("[Done]: ");
 	print_array(&array[start], end - start + 1);
+
+	free(left_array);
+	free(right_array);
 }
